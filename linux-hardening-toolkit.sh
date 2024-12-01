@@ -3,7 +3,7 @@
 # Log file with a timestamp
 LOGFILE="linux_hardening_log_$(date +%Y-%m-%d_%H-%M-%S).txt"
 CLEANED_REPORT="cleaned_lynis_audit_report_$(date +%Y-%m-%d_%H-%M-%S).txt"
-EMAIL="darshithtn@gmail.com"
+EMAIL="example@gmail.com"
 
 # Start logging
 exec > >(tee -a "$LOGFILE") 2>&1
@@ -61,7 +61,7 @@ if grep -q "Initializing program" lynis_audit_report.txt; then
     sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g" lynis_audit_report.txt > "$CLEANED_REPORT"
     echo "Cleaned report saved to $CLEANED_REPORT."
 
-    # Send the cleaned report via email using mutt (ensure mutt is installed)
+    # Send the cleaned report via email using mutt 
     echo "Sending cleaned Lynis audit report via email..."
     if command -v mutt > /dev/null; then
         echo "Please find the attached cleaned Lynis audit report." | mutt -s "Lynis Audit Report" -a "$CLEANED_REPORT" -- "$EMAIL"
